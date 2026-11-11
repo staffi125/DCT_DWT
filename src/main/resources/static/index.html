@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Лабораторна №3 — DCT і DWT</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+    <div>
+        <p class="eyebrow">Лабораторна робота №3</p>
+        <h1>Стиснення зображень з втратами: DCT і Haar DWT</h1>
+        <p class="lead">Власна реалізація прямого/оберненого DCT (блоки 8×8, матрична форма) та вейвлета Хаара.
+            Стиснення — збереження частки найбільших за модулем коефіцієнтів.</p>
+    </div>
+</header>
+
+<main>
+    <!-- ── Controls ──────────────────────────────────────────────────── -->
+    <section class="panel">
+        <label class="file">
+            Зображення (відтінки сірого; якщо не вибрано — синтетичне 512×512)
+            <input id="file" type="file" accept="image/*">
+        </label>
+        <label class="slider">
+            Частка збережених коефіцієнтів: <strong id="keepLabel">15%</strong>
+            <input id="keep" type="range" min="1" max="100" value="15">
+        </label>
+        <div class="actions">
+            <button id="compress" type="button">
+                <span class="btn-text">Стиснути та порівняти</span>
+                <span class="spinner" hidden></span>
+            </button>
+            <button id="experiments" type="button" class="secondary">
+                <span class="btn-text">Експерименти (5%, 15%, 40%)</span>
+                <span class="spinner" hidden></span>
+            </button>
+        </div>
+        <p id="status" class="status">Натисніть «Стиснути», щоб завантажити синтетичний приклад.</p>
+    </section>
+
+    <!-- ── Single compare (Original | DCT | DWT) ─────────────────────── -->
+    <section class="compare" id="compare-section">
+        <figure>
+            <figcaption>Original</figcaption>
+            <img id="img-original" alt="Оригінал">
+        </figure>
+        <figure>
+            <figcaption>DCT</figcaption>
+            <img id="img-dct" alt="Відновлене DCT">
+            <div id="meta-dct" class="meta"></div>
+        </figure>
+        <figure>
+            <figcaption>DWT (Haar)</figcaption>
+            <img id="img-dwt" alt="Відновлене DWT">
+            <div id="meta-dwt" class="meta"></div>
+        </figure>
+    </section>
+
+    <!-- ── Experiments: visual rows ──────────────────────────────────── -->
+    <section class="panel" id="exp-section" hidden>
+        <h2>Результати експериментів</h2>
+        <p class="note">
+            Коефіцієнт стиснення = N<sub>пікселів</sub> / K<sub>збережених</sub> —
+            оцінка розрідженості спектра (без ентропійного кодування).
+        </p>
+
+        <!-- Visual rows — filled dynamically by app.js -->
+        <div id="exp-visual"></div>
+
+        <!-- PSNR bar chart -->
+        <h3 style="margin-top:28px">PSNR — порівняння методів (дБ)</h3>
+        <canvas id="psnr-chart" height="220"></canvas>
+
+        <!-- Metrics table -->
+        <h3 style="margin-top:28px">Зведена таблиця метрик</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>Keep, %</th>
+                    <th>DCT PSNR, дБ</th>
+                    <th>DCT keep / ratio</th>
+                    <th>DWT PSNR, дБ</th>
+                    <th>DWT keep / ratio</th>
+                </tr>
+                </thead>
+                <tbody id="exp-body">
+                <tr><td colspan="5">Ще не проведено</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3 style="margin-top:28px">Висновки</h3>
+        <p id="conclusions" class="conclusions"></p>
+    </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

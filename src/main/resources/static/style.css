@@ -1,0 +1,376 @@
+:root {
+    --bg: #12141a;
+    --panel: #1c2029;
+    --line: #2c3340;
+    --text: #e8e6e1;
+    --muted: #9aa3b2;
+    --accent: #7cb8ff;
+    --ok: #8fd6a8;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a2230, var(--bg) 45%);
+    color: var(--text);
+}
+
+header, main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px 8px;
+}
+
+.eyebrow {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 8px;
+    font-size: 12px;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.lead, .note {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    margin: 16px 0 24px;
+}
+
+label {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--muted);
+}
+
+input[type="file"], input[type="range"] {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    background: var(--accent);
+    color: #102033;
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line);
+}
+
+.status {
+    min-height: 1.4em;
+    color: var(--ok);
+}
+
+.compare {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+figure {
+    margin: 0;
+    background: #0d0f14;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+figcaption {
+    padding: 10px 12px 0;
+    font-weight: 600;
+}
+
+img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: #000;
+    display: block;
+}
+
+.meta {
+    padding: 10px 12px 14px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+    white-space: pre-line;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+
+th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.conclusions {
+    white-space: pre-line;
+    line-height: 1.55;
+    margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+    .compare {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Spinner ───────────────────────────────────────────────────── */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(16,32,51,.4);
+    border-top-color: #102033;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    vertical-align: middle;
+}
+
+/* ── Experiment visual blocks ──────────────────────────────────── */
+.exp-level {
+    margin-bottom: 28px;
+}
+
+.exp-level-title {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.exp-compare {
+    margin-top: 0;
+}
+
+/* ── PSNR chart canvas ─────────────────────────────────────────── */
+#psnr-chart {
+    width: 100%;
+    display: block;
+    background: #0d0f14;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+/* ── Table wrapper (horizontal scroll on small screens) ─────────── */
+.table-wrap {
+    overflow-x: auto;
+}
+
+/* ── Winner cell highlight ─────────────────────────────────────── */
+.cell-win {
+    color: var(--ok);
+    font-weight: 600;
+}
+
+h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* ── Report / Theory section ───────────────────────────────────── */
+.report-section {
+    cursor: default;
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 0;
+}
+
+.report-header:hover h2 {
+    color: var(--accent);
+}
+
+.report-chevron {
+    font-size: 18px;
+    color: var(--accent);
+    transition: transform .25s;
+}
+
+.report-header h2 {
+    font-size: 17px;
+}
+
+h4 {
+    margin: 16px 0 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.report-text {
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 6px 0 10px;
+}
+
+.report-hr {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 22px 0;
+}
+
+.formula-box {
+    background: #0d0f14;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: "Courier New", "Consolas", monospace;
+    font-size: 14px;
+    color: #c9d1e0;
+    line-height: 1.8;
+    margin: 10px 0 14px;
+}
+
+.artifact-box {
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.dct-box {
+    background: rgba(124,184,255,0.07);
+    border: 1px solid rgba(124,184,255,0.3);
+    color: #a8c8f0;
+}
+
+.dwt-box {
+    background: rgba(143,214,168,0.07);
+    border: 1px solid rgba(143,214,168,0.3);
+    color: #a0d4b0;
+}
+
+.subbands {
+    padding: 10px;
+}
+
+.subband-table {
+    width: 200px;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-size: 13px;
+}
+
+.subband-table td {
+    border: 1px solid var(--line);
+    padding: 10px 16px;
+    text-align: center;
+}
+
+.sb-ll { background: rgba(124,184,255,0.2); color: #7cb8ff; font-weight: 600; }
+.sb-hl { background: rgba(124,184,255,0.08); color: #9aa3b2; }
+.sb-lh { background: rgba(124,184,255,0.08); color: #9aa3b2; }
+.sb-hh { background: rgba(50,50,60,0.5);    color: #666c7a; }
+
+.psnr-scale {
+    margin: 12px 0;
+}
+
+.psnr-bar {
+    height: 10px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+
+.psnr-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.compare-table-wrap {
+    overflow-x: auto;
+}
+
+.compare-theory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.compare-theory-table th {
+    background: var(--line);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.compare-theory-table td {
+    padding: 8px 12px;
+    color: var(--muted);
+}
+
+.compare-theory-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+}
+
+.conclusions-box {
+    background: #0d0f14;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+
+.conclusions-box p {
+    margin: 0 0 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.conclusions-box p:last-child {
+    margin-bottom: 0;
+}
+
+
